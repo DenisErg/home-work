@@ -1,7 +1,10 @@
 package sk.edenis.homeworkunion.dto;
 
+import java.util.UUID;
+
 public class InsuredOverviewResponseDTO {
 
+    private UUID insuredId;
     private String firstName;
     private String lastName;
     private String personalIdentificationNumber;
@@ -34,6 +37,14 @@ public class InsuredOverviewResponseDTO {
 
     public void setPersonalIdentificationNumber(String personalIdentificationNumber) {
         this.personalIdentificationNumber = personalIdentificationNumber;
+    }
+
+    public UUID getInsuredId() {
+        return insuredId;
+    }
+
+    public void setInsuredId(UUID insuredId) {
+        this.insuredId = insuredId;
     }
 
     public String getEmail() {

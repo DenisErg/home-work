@@ -1,5 +1,6 @@
 package sk.edenis.homeworkunion.utility;
 
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import sk.edenis.homeworkunion.exception.InvalidFieldFormatException;
 import sk.edenis.homeworkunion.exception.MissingFieldException;
 
@@ -8,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public final class FieldValidatorUtil {
 
@@ -64,8 +66,17 @@ public final class FieldValidatorUtil {
         return Boolean.parseBoolean(field);
     }
 
-    public static void validateContractMap(Map<String, Object> contractMap, List<String> fields){
-        for(String field : fields) {
+    public static UUID validateUUID(String label, String uuid) {
+        validateString(label, uuid);
+        try {
+            return UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidFieldFormatException("Id nie je valídne!");
+        }
+    }
+
+    public static void validateContractMap(Map<String, Object> contractMap, List<String> fields) {
+        for (String field : fields) {
             if (!contractMap.containsKey(field)) {
                 throw new MissingFieldException("Chýbajúce pole " + field);
             }

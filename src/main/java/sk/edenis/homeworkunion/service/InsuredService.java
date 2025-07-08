@@ -14,7 +14,7 @@ public interface InsuredService {
 
     List<InsuredOverviewResponseDTO> getAllInsured();
 
-    InsuredDetailResponseDTO getInsuredById(UUID id);
+    InsuredDetailResponseDTO getInsuredById(String id);
 
     InsuredDetailResponseDTO buildInsuredDetailResponseDTO(Insured insured);
 }

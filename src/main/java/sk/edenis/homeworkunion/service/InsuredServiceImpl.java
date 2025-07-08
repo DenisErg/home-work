@@ -1,8 +1,6 @@
 package sk.edenis.homeworkunion.service;
 
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +10,7 @@ import sk.edenis.homeworkunion.model.Address;
 import sk.edenis.homeworkunion.model.InsuranceContract;
 import sk.edenis.homeworkunion.model.Insured;
 import sk.edenis.homeworkunion.repository.InsuredRepository;
+import sk.edenis.homeworkunion.utility.FieldValidatorUtil;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.*;
@@ -19,8 +18,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class InsuredServiceImpl implements InsuredService {
-
-    private static final Logger logger = LoggerFactory.getLogger(InsuredServiceImpl.class);
     private final AddressService addressService;
     private final InsuranceContractService insuranceContractService;
     private final InsuredRepository insuredRepository;
@@ -103,8 +100,10 @@ public class InsuredServiceImpl implements InsuredService {
     }
 
     @Override
-    public InsuredDetailResponseDTO getInsuredById(UUID id) {
-        Insured insured = insuredRepository.findById(id)
+    public InsuredDetailResponseDTO getInsuredById(String id) {
+        UUID uuid = FieldValidatorUtil.validateUUID("ID",id);
+
+        Insured insured = insuredRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Poistenec s ID: " + id + " nebol nájdený!"));
 
         InsuredDetailResponseDTO dto = buildInsuredDetailResponseDTO(insured);
