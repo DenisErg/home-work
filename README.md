@@ -1,3 +1,8 @@
+Link to postman collection: https://www.postman.com/cryosat-cosmologist-88135388/union-home-work/request/75q6q45/save-insured
+
+ in case of malfunction is attached below.
+
+
 TESTING MESSAGE:
 
 {
